@@ -1,6 +1,9 @@
-package com.mucida.study;
+package com.mucida.study.ninjas;
 
+import com.mucida.study.missoes.MissaoModel;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table (name = "tb_ninja")
@@ -18,6 +21,10 @@ public class NinjaModel {
 
     @Column
     private int idade;
+
+    @ManyToOne
+    @JoinColumn(name = "id_missao")
+    private MissaoModel missao;
 
     public NinjaModel() {
     }
