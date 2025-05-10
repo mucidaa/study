@@ -1,6 +1,5 @@
-package com.mucida.study.ninjas;
+package com.mucida.study.model;
 
-import com.mucida.study.missoes.MissaoModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

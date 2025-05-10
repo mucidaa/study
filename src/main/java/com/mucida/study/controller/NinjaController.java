@@ -1,4 +1,4 @@
-package com.mucida.study.ninjas;
+package com.mucida.study.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
