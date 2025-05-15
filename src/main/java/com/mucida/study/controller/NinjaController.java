@@ -3,7 +3,7 @@ package com.mucida.study.controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("/ninjas")
 public class NinjaController {
 
     @GetMapping
@@ -11,27 +11,27 @@ public class NinjaController {
         return "This is the home page";
     }
 
-    @PostMapping("/ninjas")
+    @PostMapping()
     public String addNinja(){
         return "Ninja added";
     }
 
-    @GetMapping("/ninjas")
+    @GetMapping()
     public String getAllNinjas(){
         return "All ninjas got";
     }
 
-    @GetMapping("/ninjas/{id}")
+    @GetMapping("/{id}")
     public String getNinjaById(@PathVariable int id){
         return "Ninja got";
     }
 
-    @PutMapping("/ninjas")
+    @PutMapping()
     public String updateNinja(){
         return "Ninja updated";
     }
 
-    @DeleteMapping("/ninjas/{id}")
+    @DeleteMapping("/{id}")
     public String deleteNinja(@PathVariable int id){
         return "Ninja deleted";
     }
