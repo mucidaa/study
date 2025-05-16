@@ -1,39 +1,44 @@
 package com.mucida.study.controller;
 
+import com.mucida.study.model.NinjaModel;
+import com.mucida.study.service.NinjaService;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/ninjas")
 public class NinjaController {
 
-    @GetMapping
-    public String home(){
-        return "This is the home page";
+    private final NinjaService ninjaService;
+
+    public NinjaController(NinjaService ninjaService) {
+        this.ninjaService = ninjaService;
     }
 
     @PostMapping()
-    public String addNinja(){
-        return "Ninja added";
+    public void addNinja(@RequestBody NinjaModel ninja){
+        ninjaService.addNinja(ninja);
     }
 
     @GetMapping()
-    public String getAllNinjas(){
-        return "All ninjas got";
+    public List<NinjaModel> getAllNinjas(){
+        return ninjaService.getAllNinjas();
     }
 
     @GetMapping("/{id}")
-    public String getNinjaById(@PathVariable int id){
-        return "Ninja got";
+    public NinjaModel getNinjaById(@PathVariable long id){
+        return ninjaService.getNinjaById(id);
     }
 
-    @PutMapping()
-    public String updateNinja(){
+    @PutMapping("/{id}")
+    public String updateNinja(@PathVariable int id, @RequestBody NinjaModel ninja){
         return "Ninja updated";
     }
 
     @DeleteMapping("/{id}")
-    public String deleteNinja(@PathVariable int id){
-        return "Ninja deleted";
+    public void deleteNinja(@PathVariable long id){
+        ninjaService.deleteNinja(id);
     }
 
 }

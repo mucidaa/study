@@ -1,15 +1,11 @@
 package com.mucida.study.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Setter;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Entity
 @Table (name = "tb_ninja")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class NinjaModel {
