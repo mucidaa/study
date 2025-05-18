@@ -27,17 +27,17 @@ public class NinjaController {
     }
 
     @GetMapping("/{id}")
-    public NinjaModel getNinjaById(@PathVariable long id){
+    public NinjaModel getNinjaById(@PathVariable Long id){
         return ninjaService.getNinjaById(id);
     }
 
     @PutMapping("/{id}")
-    public String updateNinja(@PathVariable int id, @RequestBody NinjaModel ninja){
+    public String updateNinja(@PathVariable Long id, @RequestBody NinjaModel ninja){
         return "Ninja updated";
     }
 
     @DeleteMapping("/{id}")
-    public void deleteNinja(@PathVariable long id){
+    public void deleteNinja(@PathVariable Long id){
         ninjaService.deleteNinja(id);
     }
 
