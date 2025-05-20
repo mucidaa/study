@@ -1,38 +1,51 @@
 package com.mucida.study.service;
 
 import com.mucida.study.model.NinjaModel;
+import com.mucida.study.model.dto.NinjaDTO;
+import com.mucida.study.model.mapper.NinjaMapper;
 import com.mucida.study.repository.NinjaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class NinjaService {
 
     private final NinjaRepository ninjaRepository;
+    private final NinjaMapper ninjaMapper;
 
-    public NinjaService(NinjaRepository ninjaRepository) {
+    public NinjaService(NinjaRepository ninjaRepository, NinjaMapper ninjaMapper) {
         this.ninjaRepository = ninjaRepository;
+        this.ninjaMapper = ninjaMapper;
     }
 
-    public List<NinjaModel> getAllNinjas() {
-        return ninjaRepository.findAll();
+    public List<NinjaDTO> getAllNinjas() {
+        return ninjaRepository.findAll()
+                .stream()
+                .map(ninjaMapper::map)
+                .collect(Collectors.toList());
     }
 
-    public NinjaModel getNinjaById(Long id) {
-        return ninjaRepository.findById(id).orElse(null);
+    public NinjaDTO getNinjaById(Long id) {
+        Optional<NinjaModel> ninjaByID = ninjaRepository.findById(id);
+        return ninjaByID.map(ninjaMapper::map).orElse(null);
     }
 
-    public void addNinja(NinjaModel ninjaModel) {
-        ninjaRepository.save(ninjaModel);
+    public void addNinja(NinjaDTO ninjaDTO) {
+        ninjaRepository.save(ninjaMapper.map(ninjaDTO));
     }
 
-    public NinjaModel updateNinja(Long id, NinjaModel ninjaModel) {
-        if (ninjaRepository.existsById(id)) {
-            ninjaModel.setId(id);
-            return ninjaRepository.save(ninjaModel);
+    public NinjaDTO updateNinja(Long id, NinjaDTO ninjaDTO) {
+        Optional<NinjaModel> ninjaExistente = ninjaRepository.findById(id);
+        if (ninjaExistente.isPresent()) {
+            NinjaModel novoNinja = ninjaMapper.map(ninjaDTO);
+            novoNinja.setId(id);
+            return ninjaMapper.map(ninjaRepository.save(novoNinja));
+        } else {
+            return null;
         }
-        return null;
     }
 
     public void deleteNinja(Long id) {
