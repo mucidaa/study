@@ -1,6 +1,7 @@
 package com.mucida.study.controller;
 
 import com.mucida.study.model.NinjaModel;
+import com.mucida.study.model.dto.NinjaDTO;
 import com.mucida.study.service.NinjaService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +18,7 @@ public class NinjaController {
     }
 
     @PostMapping()
-    public void addNinja(@RequestBody NinjaModel ninja){
+    public void addNinja(@RequestBody NinjaDTO ninja){
         ninjaService.addNinja(ninja);
     }
 
