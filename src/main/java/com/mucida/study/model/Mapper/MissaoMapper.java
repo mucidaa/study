@@ -1,4 +1,4 @@
-package com.mucida.study.model.Mapper;
+package com.mucida.study.model.mapper;
 
 public class MissaoMapper {
 }

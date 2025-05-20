@@ -1,4 +1,4 @@
-package com.mucida.study.model.DTO;
+package com.mucida.study.model.dto;
 
 public class MissaoDTO {
 }
