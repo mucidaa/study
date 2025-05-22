@@ -1,6 +1,7 @@
 package com.mucida.study.controller;
 
 import com.mucida.study.model.MissaoModel;
+import com.mucida.study.model.dto.MissaoDTO;
 import com.mucida.study.service.MissaoService;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,23 +18,23 @@ public class MissaoController {
     }
 
     @PostMapping
-    public void addMissao(@RequestBody MissaoModel missao){
-        missaoService.addMissao(missao);
+    public void addMissao(@RequestBody MissaoDTO missaoDTO){
+        missaoService.addMissao(missaoDTO);
     }
 
     @GetMapping
-    public List<MissaoModel> getAllMissoes(){
+    public List<MissaoDTO> getAllMissoes(){
         return missaoService.getAllMissoes();
     }
 
     @GetMapping("/{id}")
-    public MissaoModel getMissaoById(@PathVariable Long id){
+    public MissaoDTO getMissaoById(@PathVariable Long id){
         return missaoService.getMissaoById(id);
     }
 
     @PutMapping("/{id}")
-    public void updateMissao(@PathVariable Long id, @RequestBody MissaoModel missao){
-        missaoService.updateMissao(id, missao);
+    public void updateMissao(@PathVariable Long id, @RequestBody MissaoDTO missaoDTO){
+        missaoService.updateMissao(id, missaoDTO);
     }
 
     @DeleteMapping("/{id}")
