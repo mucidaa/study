@@ -23,8 +23,8 @@ public class NinjaModel {
     @Column
     private int idade;
 
-    @Column
-    private String rank;
+    @Column(name = "ninja_rank")
+    private String ninjaRank;
 
     @ManyToOne
     @JoinColumn(name = "id_missao")

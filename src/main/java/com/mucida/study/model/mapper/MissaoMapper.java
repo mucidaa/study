@@ -28,7 +28,6 @@ public class MissaoMapper {
 
         missaoModel.setNome(missaoDTO.getNome());
         missaoModel.setDificuldade(missaoDTO.getDificuldade());
-        missaoModel.setNinjas(missaoDTO.getNinjas().stream().map(ninjaMapper::map).toList());
 
         return missaoModel;
     }
