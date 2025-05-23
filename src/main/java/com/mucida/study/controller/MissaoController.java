@@ -1,8 +1,9 @@
 package com.mucida.study.controller;
 
-import com.mucida.study.model.MissaoModel;
 import com.mucida.study.model.dto.MissaoDTO;
 import com.mucida.study.service.MissaoService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,28 +19,42 @@ public class MissaoController {
     }
 
     @PostMapping
-    public void addMissao(@RequestBody MissaoDTO missaoDTO){
+    public ResponseEntity<String> addMissao(@RequestBody MissaoDTO missaoDTO){
         missaoService.addMissao(missaoDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(null);
     }
 
     @GetMapping
-    public List<MissaoDTO> getAllMissoes(){
-        return missaoService.getAllMissoes();
+    public ResponseEntity<List<MissaoDTO>> getAllMissoes(){
+        return ResponseEntity.status(HttpStatus.OK).body(missaoService.getAllMissoes());
     }
 
     @GetMapping("/{id}")
-    public MissaoDTO getMissaoById(@PathVariable Long id){
-        return missaoService.getMissaoById(id);
+    public ResponseEntity<MissaoDTO> getMissaoById(@PathVariable Long id){
+        if (missaoService.getMissaoById(id) != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(missaoService.getMissaoById(id));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @PutMapping("/{id}")
-    public void updateMissao(@PathVariable Long id, @RequestBody MissaoDTO missaoDTO){
-        missaoService.updateMissao(id, missaoDTO);
+    public ResponseEntity<MissaoDTO> updateMissao(@PathVariable Long id, @RequestBody MissaoDTO missaoDTO){
+        if (missaoService.getMissaoById(id) != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(missaoService.updateMissao(id, missaoDTO));
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
     @DeleteMapping("/{id}")
-    public void deleteMissao(@PathVariable Long id){
-        missaoService.deleteMissao(id);
+    public ResponseEntity<String> deleteMissao(@PathVariable Long id){
+        if (missaoService.getMissaoById(id) != null){
+            missaoService.deleteMissao(id);
+            return ResponseEntity.status(HttpStatus.OK).body(null);
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
     }
 
 }
